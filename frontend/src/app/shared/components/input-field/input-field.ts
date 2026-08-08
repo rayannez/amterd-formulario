@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -18,6 +18,12 @@ export class InputFieldComponent extends BaseFieldComponent {
   readonly type = input('text');
   readonly mask = input<string>('');
   readonly placeholder = input<string>('');
+
+  readonly blur = output<void>();
+
+    onBlur(): void {
+        this.blur.emit();
+    }
 
   onInput(event: Event): void {
 

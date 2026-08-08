@@ -148,10 +148,12 @@
                 </app-select-field>
         
                 <app-input-field
-                    label="CEP"
-                    mask="cep"
-                    placeholder="00000-000"
-                    [control]="formulario.controls.cep">
+                [control]="formulario.controls.cep"
+                label="CEP"
+                mask="cep"
+                placeholder="00000-000"
+                [required]="true"
+                (blur)="onCepBlur()">
                 </app-input-field>
         
             </div>
