@@ -11,7 +11,8 @@ import { FormularioService } from '../../services/formularioService';
 import { FormularioInterface } from '../../shared/interfaces/formulario.interface';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { cepValidator, cpfValidator, rgValidator } from '../../shared/validators/field.validator';
+import { cepValidator, cpfValidator, rgValidator, telefoneValidator, validarData, validarDataAssinatura, validarNomeCompleto} from '../../shared/validators/field.validator';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-formulario',
@@ -39,22 +40,25 @@ export class Formulario {
 
   private readonly fb = inject(FormBuilder);
   private readonly formService = inject(FormularioService);
+  private readonly http = inject(HttpClient);
   isSubmitting = false;
 
   
   readonly formulario = this.fb.nonNullable.group({
     nomeCompleto: ['', [
       Validators.required,
-      Validators.minLength(5)
+      Validators.minLength(5),
+      validarNomeCompleto
     ]],
     nomeMae: ['', [
       Validators.required,
-      Validators.minLength(5)
+      Validators.minLength(5),
+      validarNomeCompleto
     ]],
-    dataNascimento: ['', Validators.required],
+    dataNascimento: ['', [Validators.required, validarData]],
     sexo: ['', Validators.required],
     estadoCivil: ['', Validators.required],
-    rg: ['', Validators.required, rgValidator()],
+    rg: ['', [Validators.required, rgValidator()]],
     orgaoEmissor: ['', Validators.required],
     cpf: ['', [
       Validators.required,
@@ -70,15 +74,15 @@ export class Formulario {
       Validators.required,
       cepValidator()
     ]],
-    telefone: ['', Validators.required],
-    celular: [''],
+    telefone: ['', [Validators.required, telefoneValidator()]],
+    celular: ['', [telefoneValidator()]],
     email: ['', Validators.email],
     aceitaInclusao: [false, Validators.requiredTrue],
     declaraInformacoes: [false, Validators.requiredTrue],
     declaraResponsabilidade: [false, Validators.requiredTrue],
     autorizaUsoDados: [false, Validators.requiredTrue],
     local: ['', Validators.required],
-    dataAssinatura: ['', Validators.required],
+    dataAssinatura: ['', [Validators.required, validarDataAssinatura]],
     assinatura: ['', Validators.required]
   });
   
@@ -119,4 +123,23 @@ export class Formulario {
             }
         });
     }
+
+  onCepBlur(): void {
+    const cep = this.formulario.get('cep')?.value?.replace(/\D/g, '');
+    if (cep?.length === 8) {
+        this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`)
+            .subscribe(data => {
+                if (!data.erro) {
+                    this.formulario.patchValue({
+                        endereco: data.logradouro,
+                        bairro: data.bairro,
+                        cidade: data.localidade,
+                        uf: data.uf
+                    });
+                } else {
+                    this.formulario.get('cep')?.setErrors({ cepInvalido: true });
+                }
+            });
+    }
+  }
 }

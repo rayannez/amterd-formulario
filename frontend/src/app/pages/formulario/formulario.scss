@@ -135,3 +135,59 @@ app-select-field {
         margin-top: 8px;
     }
 }
+
+@media (max-width: 768px) {
+    :host {
+        padding: 16px 0;
+    }
+
+    .header {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+        padding: 16px;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .logo {
+        width: 160px;
+    }
+
+    .title h1 {
+        font-size: 22px;
+    }
+
+    .title h2 {
+        font-size: 14px;
+    }
+
+    .card {
+        padding: 16px;
+        border-radius: 8px;
+    }
+
+    .container {
+        padding: 0 12px;
+    }
+
+    .form-row.two-columns,
+    .form-row.three-columns,
+    .form-row.single {
+        grid-template-columns: 1fr;
+    }
+
+    app-input-field,
+    app-select-field {
+        width: 100%;
+    }
+
+    .submit-button {
+        width: 100%;
+    }
+
+    .payment-info {
+        .payment-row {
+            flex-direction: column;
+        }
+    }
+}

@@ -22,10 +22,16 @@ export abstract class BaseFieldComponent {
     pattern: 'Formato inválido.',
     cpfInvalido: 'CPF inválido.',
     cepInvalido: 'CEP inválido.',
-    rgInvalido: 'RG inválido.'
-  };
+    rgInvalido: 'RG inválido.',
+    telefoneInvalido: 'Telefone inválido. Use DDD + número (10 ou 11 dígitos).',
+    dataInvalida: 'Data inválida.',
+    dataFutura: 'Data não pode ser futura.',
+    dataMinima: 'Data muito antiga.',
+    nomeIncompleto: 'Informe o nome e sobrenome.',
+    dataPassada: 'A data não pode ser anterior a hoje.',
+};
 
-  private readonly errorMap: Record<string, keyof FieldErrorMessages> = {
+private readonly errorMap: Record<string, keyof FieldErrorMessages> = {
     required: 'required',
     email: 'email',
     minlength: 'minlength',
@@ -33,8 +39,14 @@ export abstract class BaseFieldComponent {
     pattern: 'pattern',
     cpfInvalido: 'cpfInvalido',
     cepInvalido: 'cepInvalido',
-    rgInvalido: 'rgInvalido'
-  };
+    rgInvalido: 'rgInvalido',
+    telefoneInvalido: 'telefoneInvalido',
+    dataInvalida: 'dataInvalida',
+    dataFutura: 'dataFutura',
+    dataMinima: 'dataMinima',
+    nomeIncompleto: 'nomeIncompleto',
+    dataPassada: 'dataPassada',
+};
   
   getErrorMessage(): string {
   
