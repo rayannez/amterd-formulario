@@ -1,0 +1,29 @@
+<section class="size-field">
+    <mat-form-field appearance="outline">
+
+        <mat-label [class.required]="required()">{{ label() }}</mat-label>
+    
+        <mat-select [formControl]="control()">
+    
+            @for (option of options(); track option.value) {
+    
+                <mat-option [value]="option.value">
+                    {{ option.label }}
+                </mat-option>
+    
+            }
+    
+        </mat-select>
+
+        @if (hasError()) {
+
+            <mat-error>
+    
+                {{ getErrorMessage() }}
+    
+            </mat-error>
+    
+        }    
+    
+    </mat-form-field>
+</section>

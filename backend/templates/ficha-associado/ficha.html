@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ficha de Inscrição do Associado</title>
+</head>
+<body>
+<main class="document">
+
+    <!-- =========================
+         CABEÇALHO
+    ========================== -->
+    <header class="header">
+        <img class="logo" src="{{ logo }}" alt="AMTERD">
+        <div class="header-title">
+            <h1>AMTERD</h1>
+            <h2>Ficha de Inscrição do Associado</h2>
+        </div>
+    </header>
+
+    <!-- =========================
+         DADOS PESSOAIS
+    ========================== -->
+    <section class="section">
+        <h3 class="section-title">1. Dados Pessoais</h3>
+        <div class="field full">
+            <span class="field-label">Nome Completo</span>
+            <span class="field-value">{{nomeCompleto}}</span>
+        </div>
+        <div class="field full">
+            <span class="field-label">Nome da Mãe</span>
+            <span class="field-value">{{nomeMae}}</span>
+        </div>
+        <div class="grid grid-3">
+            <div class="field">
+                <span class="field-label">Data de Nascimento</span>
+                <span class="field-value">{{dataNascimento}}</span>
+            </div>
+            <div class="field">
+                <span class="field-label">Sexo</span>
+                <span class="field-value">{{sexo}}</span>
+            </div>
+            <div class="field">
+                <span class="field-label">Estado Civil</span>
+                <span class="field-value">{{estadoCivil}}</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         DOCUMENTOS
+    ========================== -->
+    <section class="section">
+        <h3 class="section-title">2. Documentos</h3>
+        <div class="grid grid-3">
+            <div class="field">
+                <span class="field-label">RG</span>
+                <span class="field-value">{{rg}}</span>
+            </div>
+            <div class="field">
+                <span class="field-label">Órgão Emissor</span>
+                <span class="field-value">{{orgaoEmissor}}</span>
+            </div>
+            <div class="field">
+                <span class="field-label">CPF</span>
+                <span class="field-value">{{cpf}}</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         ENDEREÇO
+    ========================== -->
+    <section class="section">
+        <h3 class="section-title">3. Endereço</h3>
+        <div class="grid grid-address">
+            <div class="field address">
+                <span class="field-label">Endereço</span>
+                <span class="field-value">{{endereco}}</span>
+            </div>
+            <div class="field number">
+                <span class="field-label">Número</span>
+                <span class="field-value">{{numero}}</span>
+            </div>
+        </div>
+        <div class="grid grid-2">
+            <div class="field">
+                <span class="field-label">Complemento</span>
+                <span class="field-value">{{complemento}}</span>
+            </div>
+            <div class="field">
+                <span class="field-label">Bairro</span>
+                <span class="field-value">{{bairro}}</span>
+            </div>
+        </div>
+        <div class="grid grid-3">
+            <div class="field">
+                <span class="field-label">Cidade</span>
+                <span class="field-value">{{cidade}}</span>
+            </div>
+            <div class="field">
+                <span class="field-label">UF</span>
+                <span class="field-value">{{uf}}</span>
+            </div>
+            <div class="field">
+                <span class="field-label">CEP</span>
+                <span class="field-value">{{cep}}</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         CONTATOS
+    ========================== -->
+    <section class="section">
+        <h3 class="section-title">4. Contatos</h3>
+        <div class="grid grid-3">
+            <div class="field">
+                <span class="field-label">Telefone</span>
+                <span class="field-value">{{telefone}}</span>
+            </div>
+            <div class="field">
+                <span class="field-label">Celular</span>
+                <span class="field-value">{{celular}}</span>
+            </div>
+            <div class="field">
+                <span class="field-label">E-mail</span>
+                <span class="field-value">{{email}}</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         DECLARAÇÕES
+    ========================== -->
+    <section class="section declarations">
+        <h3 class="section-title">5. Declarações e Autorizações</h3>
+        <div class="checkbox-item">
+            <span class="checkbox">{{aceitaInclusao}}</span>
+            <span class="checkbox-text">Aceito minha inclusão no quadro de associados.</span>
+        </div>
+        <div class="checkbox-item">
+            <span class="checkbox">{{declaraInformacoes}}</span>
+            <span class="checkbox-text">Declaro que as informações fornecidas nesta ficha são verdadeiras.</span>
+        </div>
+        <div class="checkbox-item">
+            <span class="checkbox">{{declaraResponsabilidade}}</span>
+            <span class="checkbox-text">Declaro estar ciente e assumir responsabilidade pelas informações prestadas.</span>
+        </div>
+        <div class="checkbox-item">
+            <span class="checkbox">{{autorizaUsoDados}}</span>
+            <span class="checkbox-text">Autorizo o uso dos dados fornecidos para as finalidades relacionadas à associação.</span>
+        </div>
+    </section>
+
+    <!-- =========================
+         PAGAMENTO
+    ========================== -->
+    <section class="payment-info">
+        <h2>Informações sobre a Mensalidade</h2>
+        <p>O pagamento da mensalidade deverá ser realizado <strong>até o dia 15 de cada mês.</strong></p>
+        <p><strong>Chave PIX:</strong> associacaoamterd@gmail.com</p>
+        <p><strong>Mercado Pago</strong></p>
+    </section>
+
+    <!-- =========================
+         ASSINATURA
+    ========================== -->
+    <section class="section signature-section">
+        <h3 class="section-title">6. Assinatura</h3>
+        <div class="grid grid-2">
+            <div class="field">
+                <span class="field-label">Local</span>
+                <span class="field-value">{{local}}</span>
+            </div>
+            <div class="field">
+                <span class="field-label">Data</span>
+                <span class="field-value">{{dataAssinatura}}</span>
+            </div>
+        </div>
+        <div class="signature">
+            <div class="signature-line">{{assinatura}}</div>
+            <span class="signature-label">Assinatura do Associado</span>
+        </div>
+    </section>
+
+</main>
+</body>
+</html>

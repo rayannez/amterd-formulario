@@ -1,0 +1,16 @@
+<mat-form-field class="mat-mdc-form-field" appearance="outline">
+    <mat-label>{{ label() }}</mat-label>
+    <input
+        matInput
+        [type]="type()"
+        [formControl]="control()"
+        [placeholder]="placeholder()"
+        (input)="onInput($event)"
+        >
+
+        @if (hasError()) {
+            <mat-error>
+                {{ getErrorMessage() }}
+            </mat-error>
+        }
+</mat-form-field>
