@@ -8,10 +8,10 @@ export class FormularioService {
 
   private readonly http = inject(HttpClient);
 
-  private readonly api = 'http://localhost:3000/api/formulario';
+  private readonly apiUrl = 'https://amterd-formulario.onrender.com/api/formulario/enviar';
 
   enviarFormulario(data: unknown) {
-    return this.http.post(`${this.api}/enviar`, data);
+    return this.http.post(this.apiUrl, data);
   }
 
 }

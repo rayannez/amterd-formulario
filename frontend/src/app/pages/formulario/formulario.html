@@ -105,57 +105,66 @@
         <!-- Endereço -->
          
         <app-form-section title="Endereço">
-        
-            <div class="form-row two-columns">
-        
+
+            <!-- CEP primeiro -->
+            <div class="form-row single">
                 <app-input-field
-                    label="Endereço"
-                    [control]="formulario.controls.endereco">
+                    [control]="formulario.controls.cep"
+                    label="CEP"
+                    mask="cep"
+                    placeholder="00000-000"
+                    [required]="true"
+                    (focusout)="onCepBlur()">
                 </app-input-field>
-        
-                <app-input-field
-                    label="Número"
-                    [control]="formulario.controls.numero">
-                </app-input-field>
-        
             </div>
         
             <div class="form-row two-columns">
+                <app-input-field
+                    label="Endereço"
+                    [control]="formulario.controls.endereco"
+                    [readonly]="true">
+                </app-input-field>
+                <app-input-field
+                    label="Número"
+                    [control]="formulario.controls.numero"
+                    [readonly]="formulario.controls.semNumero.value"
+                    type="text"
+                    mask="soNumeros"
+                    [maxLength]="10">
+                </app-input-field>
+            </div>
+            
+            <div class="form-row single">
+                <mat-checkbox [formControl]="formulario.controls.semNumero"
+                    (change)="onSemNumero($event)">
+                    Sem número
+                </mat-checkbox>
+            </div>
         
+            <div class="form-row two-columns">
                 <app-input-field
                     label="Complemento"
                     [control]="formulario.controls.complemento">
                 </app-input-field>
-        
                 <app-input-field
                     label="Bairro"
-                    [control]="formulario.controls.bairro">
+                    [control]="formulario.controls.bairro"
+                    [readonly]="true">
                 </app-input-field>
-        
             </div>
         
-            <div class="form-row three-columns">
-        
+            <div class="form-row two-columns">
                 <app-input-field
                     label="Cidade"
-                    [control]="formulario.controls.cidade">
+                    [control]="formulario.controls.cidade"
+                    [readonly]="true">
                 </app-input-field>
-        
                 <app-select-field
                     label="UF"
                     [control]="formulario.controls.uf"
-                    [options]="selectOptions.uf">
+                    [options]="selectOptions.uf"
+                    [readonly]="true">
                 </app-select-field>
-        
-                <app-input-field
-                [control]="formulario.controls.cep"
-                label="CEP"
-                mask="cep"
-                placeholder="00000-000"
-                [required]="true"
-                (blur)="onCepBlur()">
-                </app-input-field>
-        
             </div>
         
         </app-form-section>
@@ -175,6 +184,8 @@
         
                 <app-input-field
                     label="Celular"
+                    mask="telefone"
+                    placeholder="(00) 00000-0000"
                     [control]="formulario.controls.celular">
                 </app-input-field>
         
@@ -239,9 +250,7 @@
         <!-- Assinatura -->
 
         <app-form-section title="Assinatura">
-        
             <div class="form-row two-columns">
-        
                 <app-input-field
                     label="Local"
                     [control]="formulario.controls.local">

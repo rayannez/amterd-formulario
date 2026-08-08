@@ -11,7 +11,7 @@ import { FormularioService } from '../../services/formularioService';
 import { FormularioInterface } from '../../shared/interfaces/formulario.interface';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { cepValidator, cpfValidator, rgValidator, telefoneValidator, validarData, validarDataAssinatura, validarNomeCompleto} from '../../shared/validators/field.validator';
+import { cepValidator, cpfValidator, rgValidator, telefoneValidator, validarData, validarNomeCompleto} from '../../shared/validators/field.validator';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -65,8 +65,13 @@ export class Formulario {
       cpfValidator()
     ]],
     endereco: ['', Validators.required],
-    numero: ['', Validators.required],
-    complemento: [''],
+    semNumero: [false],
+    numero: ['', [
+      Validators.required,
+      Validators.maxLength(10),
+      Validators.pattern(/^[0-9]+$/)
+    ]],
+    complemento: ['', [Validators.maxLength(50)]],
     bairro: ['', Validators.required],
     cidade: ['', Validators.required],
     uf: ['', Validators.required],
@@ -81,8 +86,8 @@ export class Formulario {
     declaraInformacoes: [false, Validators.requiredTrue],
     declaraResponsabilidade: [false, Validators.requiredTrue],
     autorizaUsoDados: [false, Validators.requiredTrue],
-    local: ['', Validators.required],
-    dataAssinatura: ['', [Validators.required, validarDataAssinatura]],
+    local: ['', [Validators.required, Validators.maxLength(100)]],
+    dataAssinatura: [{ value: new Date().toISOString().split('T')[0], disabled: true }],
     assinatura: ['', Validators.required]
   });
   
@@ -142,4 +147,15 @@ export class Formulario {
             });
     }
   }
+
+  onSemNumero(event: any): void {
+    if (event.checked) {
+        this.formulario.controls.numero.setValue('S/N');
+        this.formulario.controls.numero.disable();
+    } else {
+        this.formulario.controls.numero.setValue('');
+        this.formulario.controls.numero.enable();
+    }
+  }
+
 }

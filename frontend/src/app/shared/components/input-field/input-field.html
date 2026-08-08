@@ -5,13 +5,14 @@
         [type]="type()"
         [formControl]="control()"
         [placeholder]="placeholder()"
+        [readonly]="readonly()"
+        [maxlength]="maxLength() ?? ''"
         (blur)="onBlur()"
         (input)="onInput($event)"
-        >
-
-        @if (hasError()) {
-            <mat-error>
-                {{ getErrorMessage() }}
-            </mat-error>
-        }
+        autocomplete="off">
+    @if (hasError()) {
+        <mat-error>
+            {{ getErrorMessage() }}
+        </mat-error>
+    }
 </mat-form-field>
