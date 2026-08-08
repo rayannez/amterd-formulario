@@ -55,23 +55,17 @@
 
   export function validarData(control: AbstractControl): ValidationErrors | null {
     if (!control.value) return null;
-
     const data = new Date(control.value);
     const hoje = new Date();
     const minima = new Date('1900-01-01');
+    const idadeMinima = new Date();
+    idadeMinima.setFullYear(idadeMinima.getFullYear() - 18);
 
-    if (isNaN(data.getTime())) {
-        return { dataInvalida: true };
-    }
-    if (data > hoje) {
-        return { dataFutura: true };
-    }
-    if (data < minima) {
-        return { dataMinima: true };
-    }
-
+    if (isNaN(data.getTime())) return { dataInvalida: true };
+    if (data > idadeMinima) return { dataFutura: true };
+    if (data < minima) return { dataMinima: true };
     return null;
-}
+  }
 
 export function telefoneValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -107,21 +101,4 @@ export function validarNomeCompleto(control: AbstractControl): ValidationErrors 
   if (!control.value) return null;
   const partes = control.value.trim().split(/\s+/);
   return partes.length >= 2 ? null : { nomeIncompleto: true };
-}
-
-export function validarDataAssinatura(control: AbstractControl): ValidationErrors | null {
-  if (!control.value) return null;
-
-  const data = new Date(control.value);
-  const hoje = new Date();
-  hoje.setHours(0, 0, 0, 0);
-
-  if (isNaN(data.getTime())) {
-      return { dataInvalida: true };
-  }
-  if (data < hoje) {
-      return { dataPassada: true };
-  }
-
-  return null;
 }

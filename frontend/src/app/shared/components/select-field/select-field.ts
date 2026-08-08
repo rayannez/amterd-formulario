@@ -17,5 +17,6 @@ import { BaseFieldComponent } from '../../base/base-field.component';
 export class SelectFieldComponent extends BaseFieldComponent{
 
   readonly options = input.required<ReadonlyArray<SelectOption>>();
+  readonly readonly = input(false);
 
 }

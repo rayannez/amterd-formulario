@@ -25,7 +25,7 @@ export abstract class BaseFieldComponent {
     rgInvalido: 'RG inválido.',
     telefoneInvalido: 'Telefone inválido. Use DDD + número (10 ou 11 dígitos).',
     dataInvalida: 'Data inválida.',
-    dataFutura: 'Data não pode ser futura.',
+    dataFutura: 'O associado deve ter pelo menos 18 anos.',
     dataMinima: 'Data muito antiga.',
     nomeIncompleto: 'Informe o nome e sobrenome.',
     dataPassada: 'A data não pode ser anterior a hoje.',

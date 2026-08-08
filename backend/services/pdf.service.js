@@ -24,7 +24,7 @@ function formatarData(data) {
  * Converte o código do sexo para o texto que será exibido no PDF.
  */
 function formatarSexo(sexo) {
-    const options = { M: 'Masculino', F: 'Feminino' };
+    const options = { M: 'Masculino', F: 'Feminino', O: 'Outro' };
     return options[sexo] || sexo || '';
 }
 

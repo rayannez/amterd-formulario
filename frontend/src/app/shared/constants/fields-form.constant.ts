@@ -13,7 +13,8 @@ import { SelectOption } from "../interfaces/select-option.interface";
   export const GENDER_OPTIONS: ReadonlyArray<SelectOption> = [
     { label: 'Selecione...', value: '' },
     { label: 'Masculino', value: 'M' },
-    { label: 'Feminino', value: 'F' }
+    { label: 'Feminino', value: 'F' },
+    { label: 'Outro', value: 'O' }
   ];
 
   export const UF_OPTIONS: ReadonlyArray<SelectOption> = [
