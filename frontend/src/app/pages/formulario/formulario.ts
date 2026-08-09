@@ -130,22 +130,23 @@ export class Formulario {
     }
 
   onCepBlur(): void {
-    const cep = this.formulario.get('cep')?.value?.replace(/\D/g, '');
-    if (cep?.length === 8) {
-        this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`)
-            .subscribe(data => {
-                if (!data.erro) {
-                    this.formulario.patchValue({
-                        endereco: data.logradouro,
-                        bairro: data.bairro,
-                        cidade: data.localidade,
-                        uf: data.uf
-                    });
-                } else {
-                    this.formulario.get('cep')?.setErrors({ cepInvalido: true });
-                }
-            });
-    }
+      const cep = this.formulario.get('cep')?.value?.replace(/\D/g, '');
+      if (cep?.length === 8) {
+          this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`)
+              .subscribe(data => {
+                  if (!data.erro) {
+                      this.formulario.patchValue({
+                          endereco: data.logradouro,
+                          bairro: data.bairro,
+                          cidade: data.localidade,
+                          uf: data.uf
+                      });
+                      this.formulario.controls.uf.disable();
+                  } else {
+                      this.formulario.get('cep')?.setErrors({ cepInvalido: true });
+                  }
+              });
+      }
   }
 
   onSemNumero(event: any): void {
