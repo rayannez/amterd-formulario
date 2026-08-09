@@ -44,6 +44,9 @@ export class InputFieldComponent extends BaseFieldComponent {
       case 'cep':
         value = this.formatCep(value);
         break;
+      case 'data':
+        value = this.formatData(value);
+        break;
       case 'soNumeros':
         value = value.replace(/\D/g, '').slice(0, this.maxLength() ?? 10);
         break;
@@ -85,4 +88,11 @@ export class InputFieldComponent extends BaseFieldComponent {
     const numbers = value.replace(/\D/g, '').slice(0, 8);
     return numbers.replace(/^(\d{5})(\d)/, '$1-$2');
   }
+
+  private formatData(value: string): string {
+    const numbers = value.replace(/\D/g, '').slice(0, 8);
+    return numbers
+        .replace(/^(\d{2})(\d)/, '$1/$2')
+        .replace(/^(\d{2})\/(\d{2})(\d)/, '$1/$2/$3');
+}
 }

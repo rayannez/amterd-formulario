@@ -53,19 +53,24 @@
     };
 }
 
-  export function validarData(control: AbstractControl): ValidationErrors | null {
-    if (!control.value) return null;
-    const data = new Date(control.value);
-    const hoje = new Date();
-    const minima = new Date('1900-01-01');
-    const idadeMinima = new Date();
-    idadeMinima.setFullYear(idadeMinima.getFullYear() - 18);
+export function validarData(control: AbstractControl): ValidationErrors | null {
+  if (!control.value) return null;
 
-    if (isNaN(data.getTime())) return { dataInvalida: true };
-    if (data > idadeMinima) return { dataFutura: true };
-    if (data < minima) return { dataMinima: true };
-    return null;
-  }
+  const partes = control.value.split('/');
+  if (partes.length !== 3) return { dataInvalida: true };
+
+  const [dia, mes, ano] = partes;
+  const data = new Date(`${ano}-${mes}-${dia}`);
+  const minima = new Date('1900-01-01');
+  const idadeMinima = new Date();
+  idadeMinima.setFullYear(idadeMinima.getFullYear() - 18);
+
+  if (isNaN(data.getTime())) return { dataInvalida: true };
+  if (data > idadeMinima) return { dataFutura: true };
+  if (data < minima) return { dataMinima: true };
+
+  return null;
+}
 
 export function telefoneValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
