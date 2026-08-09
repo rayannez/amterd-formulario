@@ -2,16 +2,10 @@ const fs = require('fs');
 const path = require('path');
 const puppeteer = require('puppeteer');
 
-/**
- * Converte booleano em símbolo de checkbox.
- */
 function checkbox(valor) {
     return valor === true ? '✓' : '';
 }
 
-/**
- * Formata uma data YYYY-MM-DD para DD/MM/YYYY.
- */
 function formatarData(data) {
     if (!data) return '';
     const partes = data.split('-');
@@ -20,17 +14,11 @@ function formatarData(data) {
     return `${dia}/${mes}/${ano}`;
 }
 
-/**
- * Converte o código do sexo para o texto que será exibido no PDF.
- */
 function formatarSexo(sexo) {
     const options = { M: 'Masculino', F: 'Feminino', O: 'Outro' };
     return options[sexo] || sexo || '';
 }
 
-/**
- * Converte o código do estado civil para o texto que será exibido no PDF.
- */
 function formatarEstadoCivil(estadoCivil) {
     const options = {
         SOLTEIRO: 'Solteiro',
@@ -53,9 +41,6 @@ function preencherTemplate(template, dados) {
     });
 }
 
-/**
- * Gera o PDF da ficha.
- */
 async function gerarPdf(dados) {
     const templatePath = path.join(__dirname, '../templates/ficha-associado/ficha.html');
     const cssPath = path.join(__dirname, '../templates/ficha-associado/ficha.css');
@@ -82,7 +67,16 @@ async function gerarPdf(dados) {
 
     html = preencherTemplate(html, dadosPdf);
 
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || puppeteer.executablePath(),
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-gpu'
+        ],
+        headless: true
+    });
 
     try {
         const page = await browser.newPage();
