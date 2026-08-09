@@ -42,6 +42,15 @@ function preencherTemplate(template, dados) {
     });
 }
 
+function capitalizarTexto(texto) {
+    if (!texto) return '';
+    return texto
+        .toLowerCase()
+        .split(' ')
+        .map(palavra => palavra.charAt(0).toUpperCase() + palavra.slice(1))
+        .join(' ');
+}
+
 async function gerarPdf(dados) {
     const templatePath = path.join(__dirname, '../templates/ficha-associado/ficha.html');
     const cssPath = path.join(__dirname, '../templates/ficha-associado/ficha.css');
@@ -56,6 +65,15 @@ async function gerarPdf(dados) {
     const dadosPdf = {
         ...dados,
         logo: `data:image/png;base64,${logoBase64}`,
+        nomeCompleto: capitalizarTexto(dados.nomeCompleto),
+        nomeMae: capitalizarTexto(dados.nomeMae),
+        orgaoEmissor: capitalizarTexto(dados.orgaoEmissor),
+        endereco: capitalizarTexto(dados.endereco),
+        complemento: capitalizarTexto(dados.complemento),
+        bairro: capitalizarTexto(dados.bairro),
+        cidade: capitalizarTexto(dados.cidade),
+        local: capitalizarTexto(dados.local),
+        assinatura: capitalizarTexto(dados.assinatura),
         dataNascimento: formatarData(dados.dataNascimento),
         dataAssinatura: formatarData(dados.dataAssinatura),
         sexo: formatarSexo(dados.sexo),
@@ -77,7 +95,7 @@ async function gerarPdf(dados) {
         ],
         headless: true
     });
-    
+
     try {
         const page = await browser.newPage();
         await page.setContent(html, { waitUntil: 'networkidle0' });
