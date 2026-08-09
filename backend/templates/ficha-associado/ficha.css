@@ -41,14 +41,14 @@ body {
   }
   
   .logo-container {
-    width: 180px;
+    width: 90px;
     height: auto;
   
     display: flex;
     align-items: center;
     justify-content: center;
   
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   
   .logo-container img {
