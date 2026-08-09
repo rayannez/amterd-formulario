@@ -1,299 +1,354 @@
-<div class="container">
-
-    <header class="header">
-
-        <img
-            class="logo"
-            src="/images/logo_amterd.png"
-            alt="AMTERD">
-
-        <div class="title">
-
-            <h1>AMTERD</h1>
-
-            <h2>Ficha de Inscrição do Associado</h2>
-
-        </div>
-
-    </header>
-
-    <form
-        class="form"
-        [formGroup]="formulario"
-        (ngSubmit)="enviarFormulario()">
-
-        <!-- Dados Pessoais -->
-        <app-form-section title="Dados Pessoais">
+    @if (enviadoComSucesso) {
+        <section class="success-container">
+            <mat-card class="success-card">
+                <mat-card-content>
+                    <img
+                        class="success-logo"
+                        src="/images/logo_amterd.png"
+                        alt="AMTERD">
         
-            <!-- Linha 1 -->
-            <div class="form-row single">
-        
-                <app-input-field
-                    label="Nome Completo"
-                    [control]="formulario.controls.nomeCompleto"
-                    [required]="true">
-                </app-input-field>
-        
-            </div>
-        
-            <!-- Linha 2 -->
-            <div class="form-row single">
-        
-                <app-input-field
-                    label="Nome da Mãe"
-                    [control]="formulario.controls.nomeMae"
-                    [required]="true">
-                </app-input-field>
-        
-            </div>
-        
-            <!-- Linha 3 -->
-            <div class="form-row three-columns">
-        
-                <app-input-field
-                    label="Data de Nascimento"
-                    placeholder="dd/mm/aaaa"
-                    mask="data"
-                    type="text"
-                    [control]="formulario.controls.dataNascimento">
-                </app-input-field>
-        
-                <app-select-field
-                    label="Sexo"
-                    [control]="formulario.controls.sexo"
-                    [options]="selectOptions.gender">
-                </app-select-field>
-        
-                <app-select-field
-                    label="Estado Civil"
-                    [control]="formulario.controls.estadoCivil"
-                    [options]="selectOptions.civilStatus">
-                </app-select-field>
-        
-            </div>
-        
-        </app-form-section>
-
-        <!-- Documentos -->
-
-        <app-form-section title="Documentos">
-
-            <div class="form-row three-columns">
-
-                <app-input-field
-                    label="RG"
-                    mask="rg"
-                    placeholder="00.000.000-0"
-                    [control]="formulario.controls.rg">
-                </app-input-field>
-
-                <app-select-field
-                    label="Órgão Emissor"
-                    [control]="formulario.controls.orgaoEmissor"
-                    [options]="selectOptions.issuingAuthority">
-                </app-select-field>
-
-                <app-input-field
-                    label="CPF"
-                    mask="cpf"
-                    placeholder="000.000.000-00"
-                    [control]="formulario.controls.cpf">
-                </app-input-field>
-
-            </div>
-
-        </app-form-section>
-
-        <!-- Endereço -->
-         
-        <app-form-section title="Endereço">
-
-            <!-- CEP primeiro -->
-            <div class="form-row single">
-                <app-input-field
-                    [control]="formulario.controls.cep"
-                    label="CEP"
-                    mask="cep"
-                    placeholder="00000-000"
-                    [required]="true"
-                    (focusout)="onCepBlur()">
-                </app-input-field>
-            </div>
-        
-            <div class="form-row two-columns">
-                <app-input-field
-                    label="Endereço"
-                    [control]="formulario.controls.endereco"
-                    [readonly]="true">
-                </app-input-field>
-                <app-input-field
-                    label="Número"
-                    [control]="formulario.controls.numero"
-                    [readonly]="formulario.controls.semNumero.value"
-                    type="text"
-                    mask="soNumeros"
-                    [maxLength]="10">
-                </app-input-field>
-            </div>
-            
-            <div class="form-row single">
-                <mat-checkbox [formControl]="formulario.controls.semNumero"
-                    (change)="onSemNumero($event)">
-                    Sem número
-                </mat-checkbox>
-            </div>
-        
-            <div class="form-row two-columns">
-                <app-input-field
-                    label="Complemento"
-                    [control]="formulario.controls.complemento">
-                </app-input-field>
-                <app-input-field
-                    label="Bairro"
-                    [control]="formulario.controls.bairro"
-                    [readonly]="true">
-                </app-input-field>
-            </div>
-        
-            <div class="form-row two-columns">
-                <app-input-field
-                    label="Cidade"
-                    [control]="formulario.controls.cidade"
-                    [readonly]="true">
-                </app-input-field>
-                <app-select-field
-                    label="UF"
-                    [control]="formulario.controls.uf"
-                    [options]="selectOptions.uf"
-                    [readonly]="true">
-                </app-select-field>
-            </div>
-        
-        </app-form-section>
-
-        <!-- Contato -->
-
-        <app-form-section title="Contato">
-        
-            <div class="form-row three-columns">
-        
-                <app-input-field
-                    label="Telefone"
-                    mask="telefone"
-                    placeholder="(00) 00000-0000"
-                    [control]="formulario.controls.telefone">
-                </app-input-field>
-        
-                <app-input-field
-                    label="Celular"
-                    mask="telefone"
-                    placeholder="(00) 00000-0000"
-                    [control]="formulario.controls.celular">
-                </app-input-field>
-        
-                <app-input-field
-                    label="E-mail"
-                    type="email"
-                    [control]="formulario.controls.email">
-                </app-input-field>
-        
-            </div>
-        
-        </app-form-section>
-
-        <!-- Declarações -->
-
-        <app-form-section title="Declarações">
-        
-            <app-checkbox-field
-                label="Solicito minha inclusão no quadro de associados da AMTERD."
-                [control]="formulario.controls.aceitaInclusao">
-            </app-checkbox-field>
-        
-            <app-checkbox-field
-                label="Declaro que todas as informações prestadas são verdadeiras."
-                [control]="formulario.controls.declaraInformacoes">
-            </app-checkbox-field>
-        
-            <app-checkbox-field
-                label="Comprometo-me a comunicar qualquer alteração dos dados."
-                [control]="formulario.controls.declaraResponsabilidade">
-            </app-checkbox-field>
-        
-            <app-checkbox-field
-                label="Autorizo o tratamento dos meus dados para fins de cadastro."
-                [control]="formulario.controls.autorizaUsoDados">
-            </app-checkbox-field>
-        
-        </app-form-section>
-
-        <!-- Informações sobre a Mensalidade -->
-
-        <section class="payment-info">
-
-            <h3>Informações sobre a Mensalidade</h3>
-        
-            <p>
-                O pagamento da mensalidade no valor de <strong>R$ 10,00</strong> deverá ser realizado
-                <strong>até o dia 15 de cada mês.</strong>
-            </p>
-        
-            <div class="payment-row">
-                <strong>Chave PIX:</strong>
-                <span>associacaoamterd@gmail.com</span>
-            </div>
-        
-            <div class="payment-row">
-                <strong>Mercado Pago</strong>
-            </div>
-        
+                    <div class="success-icon">
+                        <mat-icon>check</mat-icon>
+                    </div>
+                    <h1>
+                        Inscrição enviada com sucesso!
+                    </h1>
+                    <p class="success-description">
+                        Recebemos os seus dados e a sua ficha de inscrição
+                        foi enviada para a Associação.
+                    </p>
+                    <p class="success-info">
+                        A sua inscrição será analisada em breve.
+                    </p>
+                </mat-card-content>
+            </mat-card>
         </section>
-
-        <!-- Assinatura -->
-
-        <app-form-section title="Assinatura">
-            <div class="form-row two-columns">
-                <app-input-field
-                    label="Local"
-                    [control]="formulario.controls.local">
-                </app-input-field>
+    
+    } @else if (envioComErro) {
+        <section class="error-container">
+            <mat-card class="error-card">
+                <mat-card-content>
+                    <img
+                        class="error-logo"
+                        src="/images/logo_amterd.png"
+                        alt="AMTERD">
+                    <div class="error-icon">
+                        <mat-icon>cloud_off</mat-icon>
+                    </div>
+                    <h1>
+                        Não foi possível enviar sua inscrição
+                    </h1>
+                    <p class="error-description">
+                        Ocorreu um problema ao enviar os seus dados.
+                        Mas fique tranquilo: suas informações continuam
+                        preenchidas no formulário.
+                    </p>
+                    <p class="error-info">
+                        Tente novamente em alguns instantes.
+                    </p>
+                    <button
+                        mat-raised-button
+                        type="button"
+                        class="error-button"
+                        (click)="envioComErro = false">
+                        <mat-icon>arrow_back</mat-icon>
+                        Voltar ao formulário
+                    </button>
+                </mat-card-content>
+            </mat-card>
+        </section>
         
-                <app-input-field
-                    label="Data"
-                    type="date"
-                    [control]="formulario.controls.dataAssinatura">
-                </app-input-field>
+    } @else {
+        <div class="container">
+            <header class="header">
+                <img
+                    class="logo"
+                    src="/images/logo_amterd.png"
+                    alt="AMTERD">
         
+                <div class="title">
+                    <h1>AMTERD</h1>
+                    <h2>Ficha de Inscrição do Associado</h2>
+                </div>
+            </header>
+
+        <form
+            class="form"
+            [formGroup]="formulario"
+            (ngSubmit)="enviarFormulario()">
+
+            <!-- Dados Pessoais -->
+            <app-form-section title="Dados Pessoais">
+            
+                <!-- Linha 1 -->
+                <div class="form-row single">
+            
+                    <app-input-field
+                        label="Nome Completo"
+                        [control]="formulario.controls.nomeCompleto"
+                        [required]="true">
+                    </app-input-field>
+            
+                </div>
+            
+                <!-- Linha 2 -->
+                <div class="form-row single">
+            
+                    <app-input-field
+                        label="Nome da Mãe"
+                        [control]="formulario.controls.nomeMae"
+                        [required]="true">
+                    </app-input-field>
+            
+                </div>
+            
+                <!-- Linha 3 -->
+                <div class="form-row three-columns">
+            
+                    <app-input-field
+                        label="Data de Nascimento"
+                        placeholder="dd/mm/aaaa"
+                        mask="data"
+                        type="text"
+                        [control]="formulario.controls.dataNascimento">
+                    </app-input-field>
+            
+                    <app-select-field
+                        label="Sexo"
+                        [control]="formulario.controls.sexo"
+                        [options]="selectOptions.gender">
+                    </app-select-field>
+            
+                    <app-select-field
+                        label="Estado Civil"
+                        [control]="formulario.controls.estadoCivil"
+                        [options]="selectOptions.civilStatus">
+                    </app-select-field>
+            
+                </div>
+            
+            </app-form-section>
+
+            <!-- Documentos -->
+
+            <app-form-section title="Documentos">
+
+                <div class="form-row three-columns">
+
+                    <app-input-field
+                        label="RG"
+                        mask="rg"
+                        placeholder="00.000.000-0"
+                        [control]="formulario.controls.rg">
+                    </app-input-field>
+
+                    <app-select-field
+                        label="Órgão Emissor"
+                        [control]="formulario.controls.orgaoEmissor"
+                        [options]="selectOptions.issuingAuthority">
+                    </app-select-field>
+
+                    <app-input-field
+                        label="CPF"
+                        mask="cpf"
+                        placeholder="000.000.000-00"
+                        [control]="formulario.controls.cpf">
+                    </app-input-field>
+
+                </div>
+
+            </app-form-section>
+
+            <!-- Endereço -->
+            
+            <app-form-section title="Endereço">
+
+                <!-- CEP primeiro -->
+                <div class="form-row single">
+                    <app-input-field
+                        [control]="formulario.controls.cep"
+                        label="CEP"
+                        mask="cep"
+                        placeholder="00000-000"
+                        [required]="true"
+                        (focusout)="onCepBlur()">
+                    </app-input-field>
+                </div>
+            
+                <div class="form-row two-columns">
+                    <app-input-field
+                        label="Endereço"
+                        [control]="formulario.controls.endereco"
+                        [readonly]="true">
+                    </app-input-field>
+                    <app-input-field
+                        label="Número"
+                        [control]="formulario.controls.numero"
+                        [readonly]="formulario.controls.semNumero.value"
+                        type="text"
+                        mask="soNumeros"
+                        [maxLength]="10">
+                    </app-input-field>
+                </div>
+                
+                <div class="form-row single">
+                    <mat-checkbox [formControl]="formulario.controls.semNumero"
+                        (change)="onSemNumero($event)">
+                        Sem número
+                    </mat-checkbox>
+                </div>
+            
+                <div class="form-row two-columns">
+                    <app-input-field
+                        label="Complemento"
+                        [control]="formulario.controls.complemento">
+                    </app-input-field>
+                    <app-input-field
+                        label="Bairro"
+                        [control]="formulario.controls.bairro"
+                        [readonly]="true">
+                    </app-input-field>
+                </div>
+            
+                <div class="form-row two-columns">
+                    <app-input-field
+                        label="Cidade"
+                        [control]="formulario.controls.cidade"
+                        [readonly]="true">
+                    </app-input-field>
+                    <app-select-field
+                        label="UF"
+                        [control]="formulario.controls.uf"
+                        [options]="selectOptions.uf"
+                        [readonly]="true">
+                    </app-select-field>
+                </div>
+            
+            </app-form-section>
+
+            <!-- Contato -->
+
+            <app-form-section title="Contato">
+            
+                <div class="form-row three-columns">
+            
+                    <app-input-field
+                        label="Telefone"
+                        mask="telefone"
+                        placeholder="(00) 00000-0000"
+                        [control]="formulario.controls.telefone">
+                    </app-input-field>
+            
+                    <app-input-field
+                        label="Celular"
+                        mask="telefone"
+                        placeholder="(00) 00000-0000"
+                        [control]="formulario.controls.celular">
+                    </app-input-field>
+            
+                    <app-input-field
+                        label="E-mail"
+                        type="email"
+                        [control]="formulario.controls.email">
+                    </app-input-field>
+            
+                </div>
+            
+            </app-form-section>
+
+            <!-- Declarações -->
+
+            <app-form-section title="Declarações">
+            
+                <app-checkbox-field
+                    label="Solicito minha inclusão no quadro de associados da AMTERD."
+                    [control]="formulario.controls.aceitaInclusao">
+                </app-checkbox-field>
+            
+                <app-checkbox-field
+                    label="Declaro que todas as informações prestadas são verdadeiras."
+                    [control]="formulario.controls.declaraInformacoes">
+                </app-checkbox-field>
+            
+                <app-checkbox-field
+                    label="Comprometo-me a comunicar qualquer alteração dos dados."
+                    [control]="formulario.controls.declaraResponsabilidade">
+                </app-checkbox-field>
+            
+                <app-checkbox-field
+                    label="Autorizo o tratamento dos meus dados para fins de cadastro."
+                    [control]="formulario.controls.autorizaUsoDados">
+                </app-checkbox-field>
+            
+            </app-form-section>
+
+            <!-- Informações sobre a Mensalidade -->
+
+            <section class="payment-info">
+
+                <h3>Informações sobre a Mensalidade</h3>
+            
+                <p>
+                    O pagamento da mensalidade no valor de <strong>R$ 10,00</strong> deverá ser realizado
+                    <strong>até o dia 15 de cada mês.</strong>
+                </p>
+            
+                <div class="payment-row">
+                    <strong>Chave PIX:</strong>
+                    <span>associacaoamterd@gmail.com</span>
+                </div>
+            
+                <div class="payment-row">
+                    <strong>Mercado Pago</strong>
+                </div>
+            
+            </section>
+
+            <!-- Assinatura -->
+
+            <app-form-section title="Assinatura">
+                <div class="form-row two-columns">
+                    <app-input-field
+                        label="Local"
+                        [control]="formulario.controls.local">
+                    </app-input-field>
+            
+                    <app-input-field
+                        label="Data"
+                        type="date"
+                        [control]="formulario.controls.dataAssinatura">
+                    </app-input-field>
+            
+                </div>
+            
+                <div class="form-row single">
+            
+                    <app-input-field
+                        label="Assinatura"
+                        [control]="formulario.controls.assinatura">
+                    </app-input-field>
+            
+                </div>
+            
+            </app-form-section>
+
+            <!-- Botão de Envio -->
+
+            <div class="submit-container">
+                <button
+                mat-raised-button
+                type="submit"
+                class="submit-button"
+                [disabled]="isSubmitting">
+                @if (isSubmitting) {
+                    <mat-spinner diameter="20"></mat-spinner>
+                    <span>Enviando...</span>
+                } @else {
+                    <span>Enviar inscrição</span>
+                }
+            </button>
             </div>
-        
-            <div class="form-row single">
-        
-                <app-input-field
-                    label="Assinatura"
-                    [control]="formulario.controls.assinatura">
-                </app-input-field>
-        
-            </div>
-        
-        </app-form-section>
 
-        <!-- Botão de Envio -->
-
-        <div class="submit-container">
-            <button
-            mat-raised-button
-            type="submit"
-            class="submit-button"
-            [disabled]="isSubmitting">
-            @if (isSubmitting) {
-                <mat-spinner diameter="20"></mat-spinner>
-                <span>Enviando...</span>
-            } @else {
-                <span>Enviar inscrição</span>
-            }
-        </button>
-        </div>
-
-    </form>
-
-</div>
+        </form>
+    </div>
+}

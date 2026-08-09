@@ -192,6 +192,199 @@ app-select-field {
     }
 }
 
+.success-container {
+    min-height: 70vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+}
+
+.success-card {
+    width: 100%;
+    max-width: 600px;
+
+    text-align: center;
+
+    padding: 20px;
+
+    border-radius: 20px;
+
+    border-top: 5px solid var(--amterd-orange);
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.08);
+
+    background: white;
+}
+
+.success-logo {
+    width: 220px;
+    height: auto;
+
+    margin: 10px auto 24px;
+
+    display: block;
+}
+
+.success-icon {
+    width: 72px;
+    height: 72px;
+
+    margin: 0 auto 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--amterd-orange);
+
+    mat-icon {
+        width: 42px;
+        height: 42px;
+
+        font-size: 42px;
+
+        color: white;
+    }
+}
+
+.success-card h1 {
+    margin: 0 0 18px;
+
+    color: var(--amterd-orange-dark);
+
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.success-description {
+    max-width: 480px;
+
+    margin: 0 auto 12px;
+
+    color: var(--amterd-text);
+
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.success-info {
+    margin: 0;
+
+    color: var(--amterd-text-secondary);
+
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.error-container {
+    min-height: 70vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+}
+
+.error-card {
+    width: 100%;
+    max-width: 600px;
+
+    padding: 20px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    border-top: 5px solid #d9534f;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.08);
+
+    background: white;
+}
+
+.error-logo {
+    width: 220px;
+    height: auto;
+
+    display: block;
+
+    margin: 10px auto 24px;
+}
+
+.error-icon {
+    width: 72px;
+    height: 72px;
+
+    margin: 0 auto 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fce8e6;
+
+    mat-icon {
+        width: 40px;
+        height: 40px;
+
+        font-size: 40px;
+
+        color: #d9534f;
+    }
+}
+
+.error-card h1 {
+    margin: 0 0 18px;
+
+    color: #333;
+
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.error-description {
+    max-width: 480px;
+
+    margin: 0 auto 12px;
+
+    color: var(--amterd-text);
+
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.error-info {
+    margin: 0 0 28px;
+
+    color: var(--amterd-text-secondary);
+
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.error-button {
+    min-width: 220px;
+    height: 44px;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    mat-icon {
+        margin-right: 8px;
+    }
+}
+
 ::ng-deep .mobile-select {
     max-height: 250px !important;
 }

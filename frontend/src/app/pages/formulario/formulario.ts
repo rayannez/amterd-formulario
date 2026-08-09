@@ -10,6 +10,8 @@ import { FormSectionComponent } from '../../shared/components/form-section/form-
 import { FormularioService } from '../../services/formularioService';
 import { FormularioInterface } from '../../shared/interfaces/formulario.interface';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { cepValidator, cpfValidator, rgValidator, telefoneValidator, validarData, validarNomeCompleto} from '../../shared/validators/field.validator';
 import { HttpClient } from '@angular/common/http';
@@ -24,6 +26,8 @@ import { HttpClient } from '@angular/common/http';
     CheckboxFieldComponent,
     FormSectionComponent,
     MatButtonModule,
+    MatIconModule,
+    MatCardModule,
     MatProgressSpinnerModule,
     MATERIAL_MODULES
   ],
@@ -42,7 +46,8 @@ export class Formulario {
   private readonly formService = inject(FormularioService);
   private readonly http = inject(HttpClient);
   isSubmitting = false;
-
+  enviadoComSucesso = false;
+  envioComErro = false;
   
   readonly formulario = this.fb.nonNullable.group({
     nomeCompleto: ['', [
@@ -90,7 +95,7 @@ export class Formulario {
     dataAssinatura: [{ value: new Date().toISOString().split('T')[0], disabled: true }],
     assinatura: ['', Validators.required]
   });
-  
+
   enviarFormulario(): void {
     if (this.isSubmitting) {
         return;
@@ -105,25 +110,24 @@ export class Formulario {
         this.formulario.getRawValue();
 
     this.isSubmitting = true;
+    this.envioComErro = false;
 
     this.formService
         .enviarFormulario(data)
         .subscribe({
-            next: (response) => {
-                alert(
-                    'Inscrição enviada com sucesso.'
-                );
+            next: () => {
+                this.enviadoComSucesso = true;
                 this.formulario.reset();
                 this.isSubmitting = false;
             },
+
             error: (error) => {
                 console.error(
                     'Erro ao enviar inscrição:',
                     error
                 );
-                alert(
-                    'Erro ao enviar inscrição. Tente novamente.'
-                );
+
+                this.envioComErro = true;
                 this.isSubmitting = false;
             }
         });
