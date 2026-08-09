@@ -69,7 +69,6 @@ async function gerarPdf(dados) {
     html = preencherTemplate(html, dadosPdf);
 
     const browser = await puppeteer.launch({
-        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || await puppeteer.executablePath(),
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
@@ -78,7 +77,7 @@ async function gerarPdf(dados) {
         ],
         headless: true
     });
-
+    
     try {
         const page = await browser.newPage();
         await page.setContent(html, { waitUntil: 'networkidle0' });
