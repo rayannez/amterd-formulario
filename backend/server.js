@@ -17,16 +17,8 @@ app.use(express.json());
 app.post('/api/formulario/enviar', async (req, res) => {
 
     try {
-
         const dados = req.body;
-
-        console.log('Formulário recebido:');
-        console.log(dados);
-
         const pdfPath = await gerarPdf(dados);
-
-        console.log('PDF gerado:');
-        console.log(pdfPath);
 
         await enviarFormularioPorEmail(
             pdfPath,
