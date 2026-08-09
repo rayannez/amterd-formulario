@@ -8,6 +8,7 @@ function checkbox(valor) {
 
 function formatarData(data) {
     if (!data) return '';
+    if (data.includes('/')) return data;
     const partes = data.split('-');
     if (partes.length !== 3) return data;
     const [ano, mes, dia] = partes;
@@ -68,7 +69,7 @@ async function gerarPdf(dados) {
     html = preencherTemplate(html, dadosPdf);
 
     const browser = await puppeteer.launch({
-        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || puppeteer.executablePath(),
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || await puppeteer.executablePath(),
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
