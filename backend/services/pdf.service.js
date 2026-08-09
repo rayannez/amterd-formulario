@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const puppeteer = require('puppeteer');
+const chromium = require('@sparticuz/chromium');
+const puppeteer = require('puppeteer-core');
 
 function checkbox(valor) {
     return valor === true ? '✓' : '';
@@ -87,13 +88,10 @@ async function gerarPdf(dados) {
     html = preencherTemplate(html, dadosPdf);
 
     const browser = await puppeteer.launch({
-        args: [
-            '--no-sandbox',
-            '--disable-setuid-sandbox',
-            '--disable-dev-shm-usage',
-            '--disable-gpu'
-        ],
-        headless: true
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath(),
+        headless: chromium.headless
     });
 
     try {
