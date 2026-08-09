@@ -96,7 +96,7 @@ async function gerarPdf(dados) {
 
     try {
         const page = await browser.newPage();
-        await page.setContent(html, { waitUntil: 'networkidle0' });
+        await page.setContent(html, { waitUntil: 'domcontentloaded' });
 
         const outputPath = path.join(__dirname, '../ficha-preenchida.pdf');
 
